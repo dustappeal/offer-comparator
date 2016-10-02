@@ -7,6 +7,7 @@ var passed = [];
 var failed = [];
 
 mocha.addFile('test/exampleTest'); // direct mocha to exampleTest.js
+mocha.addFile('test/mainTest');
 
 mocha.run(function(){
 

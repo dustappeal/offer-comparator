@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>The salary offer comparator!</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta id="description" content="">
+        <meta id="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
@@ -32,29 +32,30 @@
                     <td></td></td><td>Offer 1</td><td>Offer 2</td>  
                 </tr>
                 <tr>
-                    <td>Name (e.g. EvilCorp):</td><td><input type="text" name="name0"/></td><td><input type="text" name="name1"/></td>
+                    <td>Name (e.g. EvilCorp):</td><td><input type="text" id="name0"/></td><td><input type="text" id="name1"/></td>
                 </tr>   
                 <tr>
-                    <td>Base $:</td><td><input type="text" name="salary0"/></td><td><input type="text" name="salary1"/></td>
+                    <td>Base $:</td><td><input type="text" id="salary0"/></td><td><input type="text" id="salary1"/></td>
                 </tr>   
                 <tr>
-                    <td>Relocation $:</td><td><input type="text" name="relocation0"/></td><td><input type="text" name="relocation1"/></td>
+                    <td>Relocation $:</td><td><input type="text" id="relocation0"/></td><td><input type="text" id="relocation1"/></td>
                 </tr>   
                 <tr>
-                    <td>Bonus $ (year1/year2/...):</td><td><input type="text" name="bonus0"/></td><td><input type="text" name="bonus1"/></td>
+                    <td>Bonus $ (year1/year2/...):</td><td><input type="text" id="bonus0"/></td><td><input type="text" id="bonus1"/></td>
                 </tr>   
                 <tr>
-                    <td>Stock units (total):</td><td><input type="text" name="stock0"/></td><td><input type="text" name="stock1"/></td>
+                    <td>Stock units (total):</td><td><input type="text" id="stock0"/></td><td><input type="text" id="stock1"/></td>
                 </tr>   
                 <tr>
-                    <td>Stock price (current):</td><td><input type="text" name="stock0"/></td><td><input type="text" name="stock1"/></td>
+                    <td>Stock price (current):</td><td><input type="text" id="price0"/></td><td><input type="text" id="price1"/></td>
                 </tr>   
                 <tr>
-                    <td>Vesting schedule (year1/year2/...:</td><td><input type="text" name="vest0"/></td><td><input type="text" name="vest1"/></td>
+                    <td>Vesting schedule (year1/year2/...:</td><td><input type="text" id="vest0"/></td><td><input type="text" id="vest1"/></td>
                 </tr>
             </table>
             <input type="submit" value="Calculate"/>
         </form>
+        <div id="results"></div>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

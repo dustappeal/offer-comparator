@@ -1,0 +1,14 @@
+var assert = require('assert');
+var main = require('../js/main');
+describe('Main', function() {
+  describe('validateVest', function() {
+    it('validate simple example', function() {
+	console.log(main);
+      assert.deepEqual(main.validateVest('5/15/40/40'), [5,15,40,40]);
+    });
+    it('validate with percentage signs', function() {
+	console.log(main);
+      assert.deepEqual(main.validateVest('5%/15%/40%/40%'), [5,15,40,40]);
+    });
+  });
+});
