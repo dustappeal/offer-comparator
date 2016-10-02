@@ -20,8 +20,13 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script type="text/javascript" src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
         <p>This comparator allows you to compare salary offers from different companies where they give you different weights of starting bonus, stock and so on.</p>
-        <form>
+        <form id="calculator-form" onsubmit="return doCalculation();">
             <table>
                 <tr>
                     <td></td></td><td>Offer 1</td><td>Offer 2</td>  
@@ -50,10 +55,6 @@
             </table>
             <input type="submit" value="Calculate"/>
         </form>
-        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
