@@ -4,5 +4,7 @@ Compare job offers from different companies that have differing amounts of stock
 ## Testing
 To run the tests:
 
- npm install mocha
- ./test.js
+```bash
+npm install mocha
+./test.js
+```
