@@ -3,11 +3,13 @@
 
 # TEAM
 
-    <name> -- <role> -- <twitter>
+    Dust Appeal -- 
+        twitter: @dustappeal
+        github: @dustappeal
 
 # THANKS
 
-    <name>
+    My parents, my cats and Lyra Silvertongue for her endless inspiration.
 
 # TECHNOLOGY COLOPHON
 
