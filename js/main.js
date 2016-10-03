@@ -46,6 +46,29 @@ function validateVest(vest) {
 	return percents;
 }
 
+function getTotalComp(base, vest, bonus) {
+	var comp = [];
+	if (vest.length > bonus.length) {
+		var longer = vest;
+		var shorter = bonus;
+	} else {
+		var longer = bonus;
+		var shorter = vest;
+	}
+	longer.forEach(function(value, index) {
+		var total = base + value;
+		if (index < shorter.length) {
+			total += shorter[index];
+		}
+		comp.push(total);
+	});
+	while (comp.length < 4) {
+		comp.push(base);
+	}
+	return comp;
+}
+
+
 function doCalculation() {
 	var name0 = document.getElementById("name0").value;
 	var salary0 = document.getElementById("salary0").value;
@@ -61,3 +84,4 @@ function doCalculation() {
 module.exports.validateVest = validateVest;
 module.exports.getStockComp = getStockComp;
 module.exports.getBonusComp = getBonusComp;
+module.exports.getTotalComp = getTotalComp;
