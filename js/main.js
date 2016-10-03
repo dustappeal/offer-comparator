@@ -101,6 +101,7 @@ function doCalculation() {
 	var vest0 = document.getElementById("vest0").value;
 
 	var totalComp = compileCompensation(salary0, relocation0, bonus0, stock0, price0, vest0);
+	d3.select("#results").style("color", "green");
 	document.getElementById('results').innerHTML = "total comp for " + name0 + " is:" + totalComp;
 	return false;
 };
