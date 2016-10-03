@@ -55,5 +55,11 @@ describe('Main', function() {
     it('simple example', function() {
       assert.deepEqual(main.compileCompensation("30","","","","",""), [30,30,30,30]);
     });
+    it('base with relocation', function() {
+      assert.deepEqual(main.compileCompensation("30","10","","","",""), [40,30,30,30]);
+    });
+    it('with all fields', function() {
+      assert.deepEqual(main.compileCompensation("30","10","10/5","100","1","5/15/40/40"), [55,50,70,70]);
+    });
   });
 });

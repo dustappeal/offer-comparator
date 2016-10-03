@@ -79,8 +79,16 @@ function getTotalComp(base, stock, bonus, relocation) {
 
 function compileCompensation(base, relocation, bonus, stock, price, vest) {
 	var stockComp = getStockComp(stock, price, validateVest(vest));
-	var bonus = getBonusComp(bonus);
-	return getTotalComp(base, stockComp, bonus, relocation);
+	var bonusComp = getBonusComp(bonus);
+	var baseVal = parseInt(base);
+	var relocationVal = parseInt(relocation);
+	if (base.length > 0 && base <= 0) {
+		throw "Base salary is invalid: " + base;
+	}
+	if (relocation.length > 0 && relocation <= 0) {
+		throw "Relocation value is invalid";
+	}
+	return getTotalComp(baseVal, stockComp, bonusComp, relocationVal);
 }
 
 function doCalculation() {
