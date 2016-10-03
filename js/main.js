@@ -82,8 +82,12 @@ function compileCompensation(base, relocation, bonus, stock, price, vest) {
 	var bonusComp = getBonusComp(bonus);
 	var baseVal = parseInt(base);
 	var relocationVal = parseInt(relocation);
-	if (base.length > 0 && base <= 0) {
-		throw "Base salary is invalid: " + base;
+	if (base.length > 0) {
+		if (baseVal <= 0) {
+			throw "Base salary is invalid: " + base;
+		}
+	} else {
+		baseVal = 0;
 	}
 	if (relocation.length > 0 && relocation <= 0) {
 		throw "Relocation value is invalid";
