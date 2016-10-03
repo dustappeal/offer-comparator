@@ -10,8 +10,22 @@ describe('Main', function() {
     });
   });
   describe('getStockComp', function() {
-    it('validate simple exaqmple', function() {
+    it('validate simple example', function() {
       assert.deepEqual(main.getStockComp(100,10,[10,20,30,40]), [100,200,300,400]);
+    });
+  });
+  describe('getBonusComp', function() {
+    it('validate simple example', function() {
+      assert.deepEqual(main.getBonusComp('10000/12000'), [10000,12000]);
+    });
+    it('validate with commas', function() {
+      assert.deepEqual(main.getBonusComp('10,000/12,000'), [10000,12000]);
+    });
+    it('validate with dollars', function() {
+      assert.deepEqual(main.getBonusComp('10,000/12,000'), [10000,12000]);
+    });
+    it('validate with euros', function() {
+      assert.deepEqual(main.getBonusComp('10,000/12,000'), [10000,12000]);
     });
   });
 });

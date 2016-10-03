@@ -7,6 +7,21 @@ function getStockComp(stock, price, vest) {
 	return vestValues;
 };
 
+function getBonusComp(bonus) {
+	var strings = bonus.replace(/$/g, "").replace(/,/g, "").split('/');
+	var values = [];
+	strings.forEach(function(item) {
+		var value = parseInt(item);
+		if (value > 0) {
+			values.push(value);
+		}
+		else {
+			throw "Invalid bonus value: " + item;
+		}
+	});
+	return values;
+};
+
 function validateVest(vest) {
 	var strings = vest.replace(/%/g, "").split('/');
 	var percents = [];
@@ -45,3 +60,4 @@ function doCalculation() {
 };
 module.exports.validateVest = validateVest;
 module.exports.getStockComp = getStockComp;
+module.exports.getBonusComp = getBonusComp;
