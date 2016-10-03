@@ -10,6 +10,9 @@ function getStockComp(stock, price, vest) {
 function getBonusComp(bonus) {
 	var strings = bonus.replace(/$/g, "").replace(/,/g, "").split('/');
 	var values = [];
+	if (bonus.length == 0) {
+		return values;
+	}
 	strings.forEach(function(item) {
 		var value = parseInt(item);
 		if (value > 0) {
@@ -25,6 +28,9 @@ function getBonusComp(bonus) {
 function validateVest(vest) {
 	var strings = vest.replace(/%/g, "").split('/');
 	var percents = [];
+	if (vest.length == 0) {
+		return percents;
+	}
 	if (strings.length < 1) {
 		throw "Stock vest percentages should be of the format year1/year2/year3"
 	}
@@ -71,7 +77,11 @@ function getTotalComp(base, stock, bonus, relocation) {
 	return comp;
 }
 
-
+function compileCompensation(base, relocation, bonus, stock, price, vest) {
+	var stockComp = getStockComp(stock, price, validateVest(vest));
+	var bonus = getBonusComp(bonus);
+	return getTotalComp(base, stockComp, bonus, relocation);
+}
 
 function doCalculation() {
 	var name0 = document.getElementById("name0").value;
@@ -82,11 +92,13 @@ function doCalculation() {
 	var price0 = document.getElementById("price0").value;
 	var vest0 = document.getElementById("vest0").value;
 
-	var totalComp = getTotalComp()
-	document.getElementById('results').innerHTML = "total comp is:" + name0;
+	var totalComp = compileCompensation(salary0, relocation0, bonus0, stock0, price0, vest0);
+	document.getElementById('results').innerHTML = "total comp for " + name0 + " is:" + totalComp;
 	return false;
 };
+
 module.exports.validateVest = validateVest;
 module.exports.getStockComp = getStockComp;
 module.exports.getBonusComp = getBonusComp;
 module.exports.getTotalComp = getTotalComp;
+module.exports.compileCompensation = compileCompensation;

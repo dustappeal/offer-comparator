@@ -8,6 +8,9 @@ describe('Main', function() {
     it('with percentage signs', function() {
       assert.deepEqual(main.validateVest('5%/15%/40%/40%'), [5,15,40,40]);
     });
+    it('empty vest values', function() {
+      assert.deepEqual(main.validateVest(''), []);
+    });
   });
   describe('getStockComp', function() {
     it('simple example', function() {
@@ -46,6 +49,11 @@ describe('Main', function() {
     });
     it('with long vest schedule', function() {
       assert.deepEqual(main.getTotalComp(60000,[1000,5000,10000,20000,30000,40000],[]), [61000,65000,70000,80000,90000,100000]);
+    });
+  });
+  describe('compileCompensation', function() {
+    it('simple example', function() {
+      assert.deepEqual(main.compileCompensation("30","","","","",""), [30,30,30,30]);
     });
   });
 });
