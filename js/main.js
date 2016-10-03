@@ -46,14 +46,14 @@ function validateVest(vest) {
 	return percents;
 }
 
-function getTotalComp(base, vest, bonus) {
+function getTotalComp(base, stock, bonus, relocation) {
 	var comp = [];
-	if (vest.length > bonus.length) {
-		var longer = vest;
+	if (stock.length > bonus.length) {
+		var longer = stock;
 		var shorter = bonus;
 	} else {
 		var longer = bonus;
-		var shorter = vest;
+		var shorter = stock;
 	}
 	longer.forEach(function(value, index) {
 		var total = base + value;
@@ -65,8 +65,12 @@ function getTotalComp(base, vest, bonus) {
 	while (comp.length < 4) {
 		comp.push(base);
 	}
+	if (relocation > 0) {
+		comp[0] += relocation;
+	}
 	return comp;
 }
+
 
 
 function doCalculation() {
@@ -78,7 +82,8 @@ function doCalculation() {
 	var price0 = document.getElementById("price0").value;
 	var vest0 = document.getElementById("vest0").value;
 
-	document.getElementById('results').innerHTML = "answer is:" + name0;
+	var totalComp = getTotalComp()
+	document.getElementById('results').innerHTML = "total comp is:" + name0;
 	return false;
 };
 module.exports.validateVest = validateVest;
