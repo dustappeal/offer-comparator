@@ -95,6 +95,16 @@ function compileCompensation(base, relocation, bonus, stock, price, vest) {
 	return getTotalComp(baseVal, stockComp, bonusComp, relocationVal);
 }
 
+function createGraph(d3, data) {
+    var chart = d3.select(".chart");
+    chart.style("color", "black");
+    var bar = chart.selectAll("div");
+    var barUpdate = bar.data(data);
+    var barEnter = barUpdate.enter().append("div");
+    barEnter.style("width", function(d) { return d * 10 + "px"; });
+    barEnter.text(function(d) { return d; });
+}
+
 function doCalculation() {
 	var name0 = document.getElementById("name0").value;
 	var salary0 = document.getElementById("salary0").value;
@@ -105,8 +115,11 @@ function doCalculation() {
 	var vest0 = document.getElementById("vest0").value;
 
 	var totalComp = compileCompensation(salary0, relocation0, bonus0, stock0, price0, vest0);
-	d3.select("#results").style("color", "green");
-	document.getElementById('results').innerHTML = "total comp for " + name0 + " is:" + totalComp;
+	d3.select("#summary").style("color", "green");
+	console.log("about to modify results!");
+	document.getElementById('summary').innerHTML = "total comp for " + name0 + " is:" + totalComp;
+	createGraph(d3, totalComp);
+	console.log("modified results!");
 	return false;
 };
 
