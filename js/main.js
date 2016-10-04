@@ -110,8 +110,13 @@ function doCalculation() {
 	return false;
 };
 
-module.exports.validateVest = validateVest;
-module.exports.getStockComp = getStockComp;
-module.exports.getBonusComp = getBonusComp;
-module.exports.getTotalComp = getTotalComp;
-module.exports.compileCompensation = compileCompensation;
+try {
+    // These are here for testing but don't matter in the browser.
+    module.exports.validateVest = validateVest;
+    module.exports.getStockComp = getStockComp;
+    module.exports.getBonusComp = getBonusComp;
+    module.exports.getTotalComp = getTotalComp;
+    module.exports.compileCompensation = compileCompensation;
+} catch (err) {
+    console.log("Module doesn't exist in browser... keep calm and carry on.")
+}
