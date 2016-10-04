@@ -23,6 +23,39 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
         <script type="text/javascript" src="js/plugins.js"></script>
         <script src="js/main.js"></script>
-	Isn't this site great?
+        <p>This comparator allows you to compare salary offers from different companies where they give you different weights of starting bonus, stock and so on.</p>
+        <form id="calculator-form" onsubmit="return doCalculation();">
+            <table>
+                <tr>
+                    <td></td></td><td>Offer 1</td><td>Offer 2</td>  
+                </tr>
+                <tr>
+                    <td>Name (e.g. EvilCorp):</td><td><input type="text" id="name0"/></td><td><input type="text" id="name1"/></td>
+                </tr>   
+                <tr>
+                    <td>Base $:</td><td><input type="text" id="salary0"/></td><td><input type="text" id="salary1"/></td>
+                </tr>   
+                <tr>
+                    <td>Relocation $:</td><td><input type="text" id="relocation0"/></td><td><input type="text" id="relocation1"/></td>
+                </tr>   
+                <tr>
+                    <td>Bonus $ (year1/year2/...):</td><td><input type="text" id="bonus0"/></td><td><input type="text" id="bonus1"/></td>
+                </tr>   
+                <tr>
+                    <td>Stock units (total):</td><td><input type="text" id="stock0"/></td><td><input type="text" id="stock1"/></td>
+                </tr>   
+                <tr>
+                    <td>Stock price (current):</td><td><input type="text" id="price0"/></td><td><input type="text" id="price1"/></td>
+                </tr>   
+                <tr>
+                    <td>Vesting schedule (year1/year2/...:</td><td><input type="text" id="vest0"/></td><td><input type="text" id="vest1"/></td>
+                </tr>
+            </table>
+            <input type="submit" value="Calculate"/>
+        </form>
+        <div id="results">
+            <div id="summary"></div>
+            <div id="graph" class="chart"></div>
+        </div>
     </body>
 </html>
