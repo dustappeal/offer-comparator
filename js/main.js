@@ -96,21 +96,44 @@ function compileCompensation(base, relocation, bonus, stock, price, vest) {
 }
 
 function createGraph(d3, data) {
-    var chart = d3.select(".chart");
-    chart.style("color", "black");
-    var bar = chart.selectAll("div");
-    var barUpdate = bar.data(data);
-    var barEnter = barUpdate.enter().append("div");
-    barEnter.style("width", function(d) { return d * 10 + "px"; });
-    barEnter.text(function(d) { return d; });
+    // set the dimensions and margins of the graph
+    var margin = {top: 20, right: 20, bottom: 30, left: 50},
+        width = 960 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+    // parse the date / time
+    var parseTime = d3.timeParse("%d-%b-%y");
+    // set the ranges
+    var x = d3.scaleTime().range([0, width]);
+    var y = d3.scaleLinear().range([height, 0]);
+    // define the line
+    var valueline = d3.line()
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.value); });
+    var svg = d3.select(".chart").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    // Scale the range of the data
+    x.domain(d3.extent(data, function(d) { return d.date; }));
+    y.domain([0, d3.max(data, function(d) { return d.value; })]);
+    
+    console.log(valueline);
+    console.log(data);
+    // Add the valueline path.
+    svg.append("path").data([data]).attr("class", "line").attr("d", valueline);
+    // Add the X Axis
+    svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x));
+    // Add the Y Axis
+    svg.append("g").call(d3.axisLeft(y));
 }
 
 function addDates(totalComp) {
     data = [];
     totalComp.forEach(function(item, index) {
-        date = new Date();
-        date.setFullYear(date.getFullYear()+index);
-        data.push({date: date, value: item});
+        thisDate = new Date();
+        thisDate.setFullYear(thisDate.getFullYear()+index);
+        data.push({date: thisDate, value: item});
     });
     return data;
 }
@@ -128,7 +151,7 @@ function doCalculation() {
 	d3.select("#summary").style("color", "green");
 	console.log("about to modify results!");
 	document.getElementById('summary').innerHTML = "total comp for " + name0 + " is:" + totalComp;
-	createGraph(d3, totalComp);
+	createGraph(d3, addDates(totalComp));
 	console.log("modified results!");
 	return false;
 };

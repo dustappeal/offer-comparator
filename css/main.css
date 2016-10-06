@@ -289,3 +289,13 @@ textarea {
   margin: 1px;
   color: white;
 }
+
+/*
+ * Styles for D3.js graphing.
+ */
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
