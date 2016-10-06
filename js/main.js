@@ -105,6 +105,16 @@ function createGraph(d3, data) {
     barEnter.text(function(d) { return d; });
 }
 
+function addDates(totalComp) {
+    data = [];
+    totalComp.forEach(function(item, index) {
+        date = new Date();
+        date.setFullYear(date.getFullYear()+index);
+        data.push({date: date, value: item});
+    });
+    return data;
+}
+
 function doCalculation() {
 	var name0 = document.getElementById("name0").value;
 	var salary0 = document.getElementById("salary0").value;
@@ -130,6 +140,7 @@ try {
     module.exports.getBonusComp = getBonusComp;
     module.exports.getTotalComp = getTotalComp;
     module.exports.compileCompensation = compileCompensation;
+    module.exports.addDates = addDates;
 } catch (err) {
     console.log("Module doesn't exist in browser... keep calm and carry on.")
 }

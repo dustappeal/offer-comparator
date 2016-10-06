@@ -62,4 +62,12 @@ describe('Main', function() {
       assert.deepEqual(main.compileCompensation("30","10","10/5","100","1","5/15/40/40"), [55,50,70,70]);
     });
   });
+  describe('addDates', function() {
+    it('simple example', function() {
+      var actual = main.addDates([1,2,3,4]);
+      assert.equal(actual[0].date.getFullYear(),new Date().getFullYear());
+      assert.equal(actual[3].date.getFullYear(),new Date().getFullYear()+3);
+      assert.equal(actual[3].value, 4);
+    });
+  });
 });
