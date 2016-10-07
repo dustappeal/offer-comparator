@@ -116,7 +116,7 @@ function createGraph(d3, data) {
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     // Scale the range of the data
     x.domain(d3.extent(data, function(d) { return d.date; }));
-    y.domain([0, d3.max(data, function(d) { return d.value; })]);
+    y.domain([0.5 * d3.min(data, function(d) { return d.value; }), 1.5 * d3.max(data, function(d) { return d.value; })]);
     
     console.log(valueline);
     console.log(data);
