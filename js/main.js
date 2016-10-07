@@ -15,7 +15,7 @@ function getBonusComp(bonus) {
 	}
 	strings.forEach(function(item) {
 		var value = parseInt(item);
-		if (value > 0) {
+		if (value >= 0) {
 			values.push(value);
 		}
 		else {
@@ -38,7 +38,7 @@ function validateVest(vest) {
 	var totalPercent = 0;
 	strings.forEach(function(item) {
 		var value = parseInt(item);
-		if (value > 0) {
+		if (value >= 0) {
 			percents.push(value);
 			totalPercent += value
 		}

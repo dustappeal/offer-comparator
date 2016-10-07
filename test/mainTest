@@ -11,6 +11,9 @@ describe('Main', function() {
     it('empty vest values', function() {
       assert.deepEqual(main.validateVest(''), []);
     });
+    it('with a zero value', function() {
+      assert.deepEqual(main.validateVest('0/20/20/60'), [0,20,20,60]);
+    });
   });
   describe('getStockComp', function() {
     it('simple example', function() {
@@ -26,6 +29,9 @@ describe('Main', function() {
     });
     it('with dollars', function() {
       assert.deepEqual(main.getBonusComp('10,000/12,000'), [10000,12000]);
+    });
+    it('with a zero value', function() {
+      assert.deepEqual(main.getBonusComp('0/1000'), [0,1000]);
     });
   });
   describe('getTotalComp', function() {
