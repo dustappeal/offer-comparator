@@ -77,8 +77,21 @@ function getTotalComp(base, stock, bonus, relocation) {
 	return comp;
 }
 
-function compileCompensation(base, relocation, bonus, stock, price, vest) {
-	var stockComp = getStockComp(stock, price, validateVest(vest));
+function getCashComp(base, bonus, relocation) {
+	var comp = [];
+	bonus.forEach(function(value, index) {
+		comp.push(base + value);
+	});
+	while (comp.length < 4) {
+		comp.push(base);
+	}
+	if (relocation > 0) {
+		comp[0] += relocation;
+	}
+	return comp;
+}
+
+function compileCashComp(base, relocation, bonus) {
 	var bonusComp = getBonusComp(bonus);
 	var baseVal = parseInt(base);
 	var relocationVal = parseInt(relocation);
@@ -92,7 +105,7 @@ function compileCompensation(base, relocation, bonus, stock, price, vest) {
 	if (relocation.length > 0 && relocation <= 0) {
 		throw "Relocation value is invalid";
 	}
-	return getTotalComp(baseVal, stockComp, bonusComp, relocationVal);
+	return getCashComp(baseVal, bonusComp, relocationVal);
 }
 
 function createGraph(d3, data) {
@@ -146,8 +159,11 @@ function doCalculation() {
 	var stock0 = document.getElementById("stock0").value;
 	var price0 = document.getElementById("price0").value;
 	var vest0 = document.getElementById("vest0").value;
+	var stockCompLow = getStockComp(stock0, price0*0.5, validateVest(vest0));
+	var stockCompMed = getStockComp(stock0, price0, validateVest(vest0));
+	var stockCompHigh = getStockComp(stock0, price0*1.5, validateVest(vest0));
 
-	var totalComp = compileCompensation(salary0, relocation0, bonus0, stock0, price0, vest0);
+	var cashComp = compileCashComp(salary0, relocation0, bonus0);
 	d3.select("#summary").style("color", "green");
 	console.log("about to modify results!");
 	document.getElementById('summary').innerHTML = "total comp for " + name0 + " is:" + totalComp;
@@ -163,7 +179,8 @@ try {
     module.exports.getStockComp = getStockComp;
     module.exports.getBonusComp = getBonusComp;
     module.exports.getTotalComp = getTotalComp;
-    module.exports.compileCompensation = compileCompensation;
+    module.exports.getCashComp = getCashComp;
+    module.exports.compileCashComp = compileCashComp;
     module.exports.addDates = addDates;
 } catch (err) {
     console.log("Module doesn't exist in browser... keep calm and carry on.")

@@ -34,6 +34,20 @@ describe('Main', function() {
       assert.deepEqual(main.getBonusComp('0/1000'), [0,1000]);
     });
   });
+  describe('getCashComp', function() {
+    it('simple example', function() {
+      assert.deepEqual(main.getCashComp(60000,[],[]), [60000,60000,60000,60000]);
+    });
+    it('with bonus', function() {
+      assert.deepEqual(main.getCashComp(60000,[10000,5000],0), [70000,65000,60000,60000]);
+    });
+    it('with relocation', function() {
+      assert.deepEqual(main.getCashComp(60000,[],10000), [70000,60000,60000,60000]);
+    });
+    it('with stock, bonus and relocation', function() {
+      assert.deepEqual(main.getCashComp(60000,[10000,5000], 5000), [75000,65000,60000,60000]);
+    });
+  });
   describe('getTotalComp', function() {
     it('simple example', function() {
       assert.deepEqual(main.getTotalComp(60000,[],[]), [60000,60000,60000,60000]);
@@ -57,15 +71,15 @@ describe('Main', function() {
       assert.deepEqual(main.getTotalComp(60000,[1000,5000,10000,20000,30000,40000],[]), [61000,65000,70000,80000,90000,100000]);
     });
   });
-  describe('compileCompensation', function() {
+  describe('compileCashComp', function() {
     it('simple example', function() {
-      assert.deepEqual(main.compileCompensation("30","","","","",""), [30,30,30,30]);
+      assert.deepEqual(main.compileCashComp("30","",""), [30,30,30,30]);
     });
     it('base with relocation', function() {
-      assert.deepEqual(main.compileCompensation("30","10","","","",""), [40,30,30,30]);
+      assert.deepEqual(main.compileCashComp("30","10",""), [40,30,30,30]);
     });
     it('with all fields', function() {
-      assert.deepEqual(main.compileCompensation("30","10","10/5","100","1","5/15/40/40"), [55,50,70,70]);
+      assert.deepEqual(main.compileCashComp("30","10","10/5"), [50,35,30,30]);
     });
   });
   describe('addDates', function() {
