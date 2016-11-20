@@ -50,25 +50,13 @@ describe('Main', function() {
   });
   describe('getTotalComp', function() {
     it('simple example', function() {
-      assert.deepEqual(main.getTotalComp(60000,[],[]), [60000,60000,60000,60000]);
+      assert.deepEqual(main.getTotalComp([1,2,3,4],[]), [1,2,3,4]);
     });
-    it('with bonus', function() {
-      assert.deepEqual(main.getTotalComp(60000,[],[10000,5000]), [70000,65000,60000,60000]);
+    it('longer stock', function() {
+      assert.deepEqual(main.getTotalComp([1,2,3,4], [1,2,3,4,5,6]), [2,4,6,8,5,6]);
     });
-    it('with stock', function() {
-      assert.deepEqual(main.getTotalComp(60000,[10000,5000],[]), [70000,65000,60000,60000]);
-    });
-    it('with relocation', function() {
-      assert.deepEqual(main.getTotalComp(60000,[],[],10000), [70000,60000,60000,60000]);
-    });
-    it('with stock and bonus', function() {
-      assert.deepEqual(main.getTotalComp(60000,[5000,10000,20000,20000],[10000,5000]), [75000,75000,80000,80000]);
-    });
-    it('with stock, bonus and relocation', function() {
-      assert.deepEqual(main.getTotalComp(60000,[5000,10000,20000,20000],[10000,5000], 5000), [80000,75000,80000,80000]);
-    });
-    it('with long vest schedule', function() {
-      assert.deepEqual(main.getTotalComp(60000,[1000,5000,10000,20000,30000,40000],[]), [61000,65000,70000,80000,90000,100000]);
+    it('longer cash', function() {
+      assert.deepEqual(main.getTotalComp([1,2,3,4],[1,2]), [2,4,3,4]);
     });
   });
   describe('compileCashComp', function() {

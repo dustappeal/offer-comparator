@@ -52,28 +52,22 @@ function validateVest(vest) {
 	return percents;
 }
 
-function getTotalComp(base, stock, bonus, relocation) {
+function getTotalComp(cash, stock) {
 	var comp = [];
-	if (stock.length > bonus.length) {
+	if (stock.length > cash.length) {
 		var longer = stock;
-		var shorter = bonus;
+		var shorter = cash;
 	} else {
-		var longer = bonus;
+		var longer = cash;
 		var shorter = stock;
 	}
 	longer.forEach(function(value, index) {
-		var total = base + value;
+		var total = value;
 		if (index < shorter.length) {
 			total += shorter[index];
 		}
 		comp.push(total);
 	});
-	while (comp.length < 4) {
-		comp.push(base);
-	}
-	if (relocation > 0) {
-		comp[0] += relocation;
-	}
 	return comp;
 }
 
