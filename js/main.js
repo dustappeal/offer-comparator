@@ -151,6 +151,7 @@ function doCalculation() {
 	d3.select("#summary").style("color", "green");
 	console.log("about to modify results!");
 	document.getElementById('summary').innerHTML = "total comp for " + name0 + " is:" + totalComp;
+    d3.select("svg").remove() // Remove existing svg
 	createGraph(d3, addDates(totalComp));
 	console.log("modified results!");
 	return false;
