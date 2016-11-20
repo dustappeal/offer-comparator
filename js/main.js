@@ -102,7 +102,7 @@ function compileCashComp(base, relocation, bonus) {
 	return getCashComp(baseVal, bonusComp, relocationVal);
 }
 
-function createGraph(d3, data) {
+function createGraph(d3, low, mid, high) {
     // set the dimensions and margins of the graph
     var margin = {top: 20, right: 20, bottom: 30, left: 50},
         width = 960 - margin.left - margin.right,
@@ -122,13 +122,13 @@ function createGraph(d3, data) {
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
     // Scale the range of the data
-    x.domain(d3.extent(data, function(d) { return d.date; }));
-    y.domain([0.5 * d3.min(data, function(d) { return d.value; }), 1.5 * d3.max(data, function(d) { return d.value; })]);
+    x.domain(d3.extent(mid, function(d) { return d.date; }));
+    y.domain([0.5 * d3.min(low, function(d) { return d.value; }), 1.5 * d3.max(high, function(d) { return d.value; })]);
     
-    console.log(valueline);
-    console.log(data);
     // Add the valueline path.
-    svg.append("path").data([data]).attr("class", "line").attr("d", valueline);
+    svg.append("path").data([low]).attr("class", "line").attr("d", valueline);
+    svg.append("path").data([mid]).attr("class", "line").attr("d", valueline);
+    svg.append("path").data([high]).attr("class", "line").attr("d", valueline);
     // Add the X Axis
     svg.append("g").attr("transform", "translate(0," + height + ")").call(d3.axisBottom(x));
     // Add the Y Axis
@@ -154,15 +154,19 @@ function doCalculation() {
     var price0 = document.getElementById("price0").value;
     var vest0 = document.getElementById("vest0").value;
     var stockCompLow = getStockComp(stock0, price0*0.5, validateVest(vest0));
-    var stockCompMed = getStockComp(stock0, price0, validateVest(vest0));
+    var stockCompMid = getStockComp(stock0, price0, validateVest(vest0));
     var stockCompHigh = getStockComp(stock0, price0*1.5, validateVest(vest0));
 
     var cashComp = compileCashComp(salary0, relocation0, bonus0);
+    
+    var lowRange = getTotalComp(stockCompLow, cashComp);
+    var midRange = getTotalComp(stockCompMid, cashComp);
+    var highRange = getTotalComp(stockCompHigh, cashComp);
     d3.select("#summary").style("color", "green");
     console.log("about to modify results!");
-    document.getElementById('summary').innerHTML = "total comp for " + name0 + " is:" + totalComp;
+    document.getElementById('summary').innerHTML = "low/mid/high range is " + name0 + " is:" + lowRange + midRange + highRange;
     d3.select("svg").remove() // Remove existing svg
-    createGraph(d3, addDates(totalComp));
+    createGraph(d3, addDates(lowRange), addDates(midRange), addDates(highRange));
     console.log("modified results!");
     return false;
 };
