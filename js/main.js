@@ -152,25 +152,25 @@ function addDates(totalComp) {
 }
 
 function doCalculation() {
-	var name0 = document.getElementById("name0").value;
-	var salary0 = document.getElementById("salary0").value;
-	var relocation0 = document.getElementById("relocation0").value;
-	var bonus0 = document.getElementById("bonus0").value;
-	var stock0 = document.getElementById("stock0").value;
-	var price0 = document.getElementById("price0").value;
-	var vest0 = document.getElementById("vest0").value;
-	var stockCompLow = getStockComp(stock0, price0*0.5, validateVest(vest0));
-	var stockCompMed = getStockComp(stock0, price0, validateVest(vest0));
-	var stockCompHigh = getStockComp(stock0, price0*1.5, validateVest(vest0));
+    var name0 = document.getElementById("name0").value;
+    var salary0 = document.getElementById("salary0").value;
+    var relocation0 = document.getElementById("relocation0").value;
+    var bonus0 = document.getElementById("bonus0").value;
+    var stock0 = document.getElementById("stock0").value;
+    var price0 = document.getElementById("price0").value;
+    var vest0 = document.getElementById("vest0").value;
+    var stockCompLow = getStockComp(stock0, price0*0.5, validateVest(vest0));
+    var stockCompMed = getStockComp(stock0, price0, validateVest(vest0));
+    var stockCompHigh = getStockComp(stock0, price0*1.5, validateVest(vest0));
 
-	var cashComp = compileCashComp(salary0, relocation0, bonus0);
-	d3.select("#summary").style("color", "green");
-	console.log("about to modify results!");
-	document.getElementById('summary').innerHTML = "total comp for " + name0 + " is:" + totalComp;
+    var cashComp = compileCashComp(salary0, relocation0, bonus0);
+    d3.select("#summary").style("color", "green");
+    console.log("about to modify results!");
+    document.getElementById('summary').innerHTML = "total comp for " + name0 + " is:" + totalComp;
     d3.select("svg").remove() // Remove existing svg
-	createGraph(d3, addDates(totalComp));
-	console.log("modified results!");
-	return false;
+    createGraph(d3, addDates(totalComp));
+    console.log("modified results!");
+    return false;
 };
 
 try {
